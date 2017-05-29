@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.3 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            Retrofit+RxJava对网络请求错误、异常进行统一处理 | 
+        
+        Akari&#39;s Blog
+    </title>
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    
+    
+    
+    
+    
+
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Akari">
+    <meta name="description" content="null">
+    <meta name="keywords" content="null,Android,Retrofit,RxJava">
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Akari&#39;s Blog">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://nonexistentakarin.github.io">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Retrofit+RxJava对网络请求错误、异常进行统一处理 | Akari&#39;s Blog">
+    <meta property="og:description" content="null">
+    <meta property="og:article:tag" content="Android"> <meta property="og:article:tag" content="Retrofit"> <meta property="og:article:tag" content="RxJava"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS & jQuery -->
+    
+        <link rel="stylesheet" href="/css/material.min.css">
+        <link rel="stylesheet" href="/css/style.min.css">
+        <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/queue.js"></script>
+    
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#错误与异常"><span class="post-toc-number">1.</span> <span class="post-toc-text">错误与异常</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#拦截处理错误请求"><span class="post-toc-number">2.</span> <span class="post-toc-text">拦截处理错误请求</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思路"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#拦截器的设置"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">拦截器的设置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据解析拦截器"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">数据解析拦截器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#onError事件拦截器"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">onError事件拦截器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#View层的调用"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">View层的调用:</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用ExceptionHandler来处理异常"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用ExceptionHandler来处理异常</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#与View层交互的异常类"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">与View层交互的异常类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#异常处理器ExceptionHandler"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">异常处理器ExceptionHandler</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#约定的错误码"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">约定的错误码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用于ExceptionHandler的服务器异常"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">用于ExceptionHandler的服务器异常</span></a></li></ol></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Retrofit+RxJava对网络请求错误、异常进行统一处理
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Akari</strong>
+        <span>5月 28, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAENklEQVR42u3aUXLbMAwEUN//0u0BWju7gNJKzNNXZ5LY5FNnSCzw+uUJnhcCTJgwYcKEyYMJEyZMt2d6xc9fPuiPn37+/WKJwTd+/pZ3q8r3iAkTJkyYTmJqF/32o9988bvfTF5Yu5Lkr6I9YsKECROm45iSTSZAm0tAcmAnP93sERMmTJgwYZotPV9icpC3BTkmTJgwYcK0Z0ouB6/FM4uAMWHChAkTpjwA3Rznm0vApuT+D1k4JkyYMGG6GdPsMH7Wv//pfBMmTJgwYboN06bp2Bafn5fVDgm1JXe9U0yYMGHCdARTfnDOytrNIT17DW2sjAkTJkyYzmaaxanJQttRntnYzVUXiLr0xYQJEyZMj2L6YoSlREmO8Lb9mV8v9sU2JkyYMGE6iaktd5Phm4R7NmrTrjNvzWLChAkTpp/AlMep7bGdF7Szi0J7TYm+BRMmTJgwHcF07eDOVdeCfWNyc1HAhAkTJkynMs0O7034uznOX+XTvnJMmDBhwnQeUxJ9btqcecy6GeVpX8Ow9MWECRMmTA9hyiPapHDdjO+0bc48us1fPCZMmDBhOo+pPWLz8rgNjvP1JJQXjBlhwoQJE6YjmGZlZFJMbgLZWUE7G0KKQl5MmDBhwvRwpjZs3SDmrdB2hbNXVVwIMGHChAnTEUztEEzy06tGbfKLSH69eLtyTJgwYcJ0BNPsWE2O8HyAph0b2n9+fSHAhAkTJkyPZWqj1aRwzUd/8lGhWXCcr7kIeTFhwoQJ0wOZ8oO5bQomn5Ac9huOtv2JCRMmTJhOYtoM2eybjrOoN4+bZ8NAmDBhwoTpPKYkrm2D3dk2ZleBtuUZ7RQTJkyYMB3ENCuD84KzLYDbtmXLF+0aEyZMmDAdx5Q3L/el5lVl6myQ6LKQFxMmTJgw3Z5p3wLcDPr8ip88/N28bEyYMGHCdDZTflHYjOwk29uM7LSR7mq+CRMmTJgwPYSpHZHJ4dqNrRqQZWRcl76YMGHChOmxTHlg2rYnk8HWdqt5fNy+PEyYMGHCdCpTsplZsDtrNOah8yywHoa8mDBhwoTpgUxtINse/7O4Nm+s5oVuHWFjwoQJE6Yfw5SUxy1re3hfdZkomqyYMGHChOkgprwAzpudbUMxf/JVtXEwJkyYMGE6j2kT6c5+M4dom50t1hefgAkTJkyYjmBqn7aJOCt3ZxHwLCZetTMxYcKECdPtmWYFZ3512Ae+yRqSa0oSDWPChAkTplOZNuHstX/7HUyf/1sMEwJMmDBhwvRApvZAnS0uv4i05ffFbVFMmDBhwvSDmfLCMg9/kwg4D4vbhigmTJgwYcKUL6sta9v49dp4ug55MWHChAnTY5nyY/XzZvJAdjPus3mp356FY8KECROmmzHlx2oSlbaFa1sGf8fFAhMmTJgwncrkiS4EHkyYMGHChAmTBxMmTHd5fgNmPBZ1Y6QAqQAAAABJRU5ErkJggg==">
+        </ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/Android/">Android</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Retrofit/">Retrofit</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/RxJava/">RxJava</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Retrofit+RxJava对网络请求错误、异常进行统一处理&url=https://nonexistentakarin.github.io//2017/05/28/handle-error-and-exception-with-Retrofit-and-RxJava/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Retrofit+RxJava对网络请求错误、异常进行统一处理&url=https://nonexistentakarin.github.io//2017/05/28/handle-error-and-exception-with-Retrofit-and-RxJava/index.html&via=Akari" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://nonexistentakarin.github.io//2017/05/28/handle-error-and-exception-with-Retrofit-and-RxJava/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://nonexistentakarin.github.io//2017/05/28/handle-error-and-exception-with-Retrofit-and-RxJava/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>在使用Retrofit+RxJava时，我们可以通过拦截器对错误的网络请求进行拦截，并交给异常处理器进行统一处理。</p>
+<h1 id="错误与异常"><a href="#错误与异常" class="headerlink" title="错误与异常"></a>错误与异常</h1><p>开发时，在对接口发送HTTP请求后，会收到返回信息。当请求发生错误时，返回的信息会告知请求失败，并返回错误码和错误消息。这其中可以分为两种情况，拿登录这一最常见的请求来说，一种是因为网络错误等原因，无法完成登录，另一种是发送了登录请求，但帐号或密码信息有误。我们可以把第一种请求失败叫做异常，把第二种请求失败叫做错误。</p>
+<p>常见的服务器返回的数据格式是这样的:</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Response</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> state<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> String message<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> T data<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>其中，异常一般指的是HTTP状态码不为2xx的情况，如400 Bad Request，500 Internal Server Error等；而错误一般指的是返回的数据中，state为服务端和客户端约定的错误码，如1001表示解析错误。</p>
+<p>在使用Retrofit + RxJava时，无论是异常还是错误，都要在subscribe方法中处理异常信息。一般来说，网络异常导致的登录失败，会调用subscribe的onError事件；而密码错误导致的登录失败，会调用subscribe的onNext事件，代码如下：</p>
+<pre class=" language-java"><code class="language-java">APIService<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getUserInfo</span><span class="token punctuation">(</span><span class="token string">"userid"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Observer</span><span class="token operator">&lt;</span>Response<span class="token operator">&lt;</span>UserInfo<span class="token operator">>></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token annotation punctuation">@Override</span>
+                    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onCompleted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+                    <span class="token punctuation">}</span>
+                    <span class="token annotation punctuation">@Override</span>
+                    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onError</span><span class="token punctuation">(</span>Throwable e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+                    <span class="token punctuation">}</span>
+
+                    <span class="token annotation punctuation">@Override</span>
+                    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onNext</span><span class="token punctuation">(</span>Response<span class="token operator">&lt;</span>User<span class="token operator">></span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">switch</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>state<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                            <span class="token keyword">case</span> <span class="token number">1001</span><span class="token operator">:</span>
+                                <span class="token comment" spellcheck="true">//.....</span>
+                            <span class="token keyword">case</span> <span class="token number">1002</span><span class="token operator">:</span>
+                                <span class="token comment" spellcheck="true">//.....</span>
+                            <span class="token keyword">case</span> <span class="token number">1003</span><span class="token operator">:</span>
+                                <span class="token comment" spellcheck="true">//.....</span>
+                            <span class="token keyword">default</span><span class="token operator">:</span>
+                                <span class="token comment" spellcheck="true">//.....</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>然而，无论是异常还是错误，其本质都是对失败请求的处理，我们可以让他们统一调用subscribe的onError事件来处理错误信息。要实现这样的流程，我们可以使用一个ExceptionHandler来统一处理这些失败的请求。</p>
+<h1 id="拦截处理错误请求"><a href="#拦截处理错误请求" class="headerlink" title="拦截处理错误请求"></a>拦截处理错误请求</h1><p>在使用Retrofit+RxJava时，我们访问接口，获取数据的流程一般是这样的：订阅-&gt;访问接口-&gt;解析数据-&gt;展示。如上所说，异常和错误本质是一样的，因此我们要尽量避免在View层对错误进行判断，处理。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>在获取数据的流程中，访问接口和解析数据时都有可能会出错，我们可以通过拦截器在这两层拦截错误。<br>1.在访问接口时，我们不用设置拦截器，因为一旦出现错误，Retrofit会自动抛出异常。<br>2.在解析数据时，我们设置一个拦截器，判断Result里面的code是否为成功，如果不成功，则要根据与服务器约定好的错误码来抛出对应的异常。<br>3.除此以外，为了我们要尽量避免在View层对错误进行判断，处理，我们必须还要设置一个拦截器，拦截onError事件，然后使用ExceptionHandler，让其根据错误类型来分别处理。</p>
+<h2 id="拦截器的设置"><a href="#拦截器的设置" class="headerlink" title="拦截器的设置"></a>拦截器的设置</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> Observable<span class="token operator">&lt;</span>UserInfo<span class="token operator">></span> <span class="token function">getUserInfo</span><span class="token punctuation">(</span>String userid<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> apiService<span class="token punctuation">.</span><span class="token function">getUserInfo</span><span class="token punctuation">(</span>userid<span class="token punctuation">)</span>
+                <span class="token comment" spellcheck="true">//拦截解析数据时的错误</span>
+                <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ServerResponseFunc</span><span class="token operator">&lt;</span>UserInfo<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token comment" spellcheck="true">//拦截onError事件</span>
+                <span class="token punctuation">.</span><span class="token function">onErrorResumeNext</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">HttpResponseFunc</span><span class="token operator">&lt;</span>UserInfo<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">subscribeOn</span><span class="token punctuation">(</span>Schedulers<span class="token punctuation">.</span><span class="token function">io</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">unsubscribeOn</span><span class="token punctuation">(</span>Schedulers<span class="token punctuation">.</span><span class="token function">io</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">observeOn</span><span class="token punctuation">(</span>AndroidSchedulers<span class="token punctuation">.</span><span class="token function">mainThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="数据解析拦截器"><a href="#数据解析拦截器" class="headerlink" title="数据解析拦截器"></a>数据解析拦截器</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">class</span> <span class="token class-name">ServerResponseFunc</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token keyword">implements</span> <span class="token class-name">Func1</span><span class="token operator">&lt;</span>Response<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">,</span> T<span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token annotation punctuation">@Override</span>
+        <span class="token keyword">public</span> T <span class="token function">call</span><span class="token punctuation">(</span>Response<span class="token operator">&lt;</span>T<span class="token operator">></span> reponse<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//对状态码进行判断，如果不是0，则根据服务端和客户端约定的错误码去解析</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>reponse<span class="token punctuation">.</span>state <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//抛出异常，捕获异常，统一处理</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">ServerException</span><span class="token punctuation">(</span>reponse<span class="token punctuation">.</span>state<span class="token punctuation">,</span>reponse<span class="token punctuation">.</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> reponse<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="onError事件拦截器"><a href="#onError事件拦截器" class="headerlink" title="onError事件拦截器"></a>onError事件拦截器</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">class</span> <span class="token class-name">HttpResultFunc</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token keyword">implements</span> <span class="token class-name">Func1</span><span class="token operator">&lt;</span>Throwable<span class="token punctuation">,</span> Observable<span class="token operator">&lt;</span>T<span class="token operator">>></span> <span class="token punctuation">{</span>
+        <span class="token annotation punctuation">@Override</span>
+        <span class="token keyword">public</span> Observable<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token function">call</span><span class="token punctuation">(</span>Throwable throwable<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//使用ExceptionHandler来处理onError事件</span>
+            <span class="token keyword">return</span> Observable<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>ExceptionHandler<span class="token punctuation">.</span><span class="token function">handleException</span><span class="token punctuation">(</span>throwable<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="View层的调用"><a href="#View层的调用" class="headerlink" title="View层的调用:"></a>View层的调用:</h2><pre class=" language-java"><code class="language-java">APIService<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getUserInfo</span><span class="token punctuation">(</span><span class="token string">"userid"</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">SampleProgressObserver</span><span class="token operator">&lt;</span>UserInfo<span class="token operator">></span><span class="token punctuation">(</span>MainActivity<span class="token punctuation">.</span><span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                            <span class="token annotation punctuation">@Override</span>
+                            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onNext</span><span class="token punctuation">(</span>UserInfo userInfo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                                userInfoTextView<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>userInfo<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h1 id="使用ExceptionHandler来处理异常"><a href="#使用ExceptionHandler来处理异常" class="headerlink" title="使用ExceptionHandler来处理异常"></a>使用ExceptionHandler来处理异常</h1><p>经过拦截，所有的错误和异常都被转到ExceptionHandler这个异常处理器来处理，那么这个异常处理器的任务便是判断并处理onError事件中的错误，并让View层知道错误及其错误信息。</p>
+<h2 id="与View层交互的异常类"><a href="#与View层交互的异常类" class="headerlink" title="与View层交互的异常类"></a>与View层交互的异常类</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ApiException</span> <span class="token keyword">extends</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> code<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> String displayMessage<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">ApiException</span><span class="token punctuation">(</span>Throwable throwable<span class="token punctuation">,</span> <span class="token keyword">int</span> code<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>throwable<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>code <span class="token operator">=</span> code<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setDisplayMessage</span><span class="token punctuation">(</span>String displayMessage<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>displayMessage <span class="token operator">=</span> displayMessage<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> String <span class="token function">getDisplayMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> displayMessage<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> code<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="异常处理器ExceptionHandler"><a href="#异常处理器ExceptionHandler" class="headerlink" title="异常处理器ExceptionHandler"></a>异常处理器ExceptionHandler</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ExceptionHandler</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//对应HTTP的状态码</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> BAD_REQUEST <span class="token operator">=</span> <span class="token number">400</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> UNAUTHORIZED <span class="token operator">=</span> <span class="token number">401</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> FORBIDDEN <span class="token operator">=</span> <span class="token number">403</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> NOT_FOUND <span class="token operator">=</span> <span class="token number">404</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> METHOD_NOT_ALLOWED <span class="token operator">=</span> <span class="token number">405</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> REQUEST_TIMEOUT <span class="token operator">=</span> <span class="token number">408</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> CONFLICT <span class="token operator">=</span> <span class="token number">409</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> PRECONDITION_FAILED <span class="token operator">=</span> <span class="token number">412</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> INTERNAL_SERVER_ERROR <span class="token operator">=</span> <span class="token number">500</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> BAD_GATEWAY <span class="token operator">=</span> <span class="token number">502</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> SERVICE_UNAVAILABLE <span class="token operator">=</span> <span class="token number">503</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> GATEWAY_TIMEOUT <span class="token operator">=</span> <span class="token number">504</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> ApiException <span class="token function">handleException</span><span class="token punctuation">(</span>Throwable e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        ApiException ex<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>e <span class="token keyword">instanceof</span> <span class="token class-name">HttpException</span><span class="token punctuation">)</span><span class="token punctuation">{</span>             <span class="token comment" spellcheck="true">//HTTP错误</span>
+            HttpException httpException <span class="token operator">=</span> <span class="token punctuation">(</span>HttpException<span class="token punctuation">)</span> e<span class="token punctuation">;</span>
+            ex <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ApiException</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> ERROR<span class="token punctuation">.</span>HTTP_ERROR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">switch</span><span class="token punctuation">(</span>httpException<span class="token punctuation">.</span><span class="token function">code</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token keyword">case</span> BAD_REQUEST<span class="token operator">:</span>
+                <span class="token keyword">case</span> UNAUTHORIZED<span class="token operator">:</span>
+                <span class="token keyword">case</span> FORBIDDEN<span class="token operator">:</span>
+                <span class="token keyword">case</span> NOT_FOUND<span class="token operator">:</span>
+                <span class="token keyword">case</span> METHOD_NOT_ALLOWED<span class="token operator">:</span>
+                <span class="token keyword">case</span> REQUEST_TIMEOUT<span class="token operator">:</span>
+                <span class="token keyword">case</span> CONFLICT<span class="token operator">:</span>
+                <span class="token keyword">case</span> PRECONDITION_FAILED<span class="token operator">:</span>
+                <span class="token keyword">case</span> GATEWAY_TIMEOUT<span class="token operator">:</span>
+                <span class="token keyword">case</span> INTERNAL_SERVER_ERROR<span class="token operator">:</span>
+                <span class="token keyword">case</span> BAD_GATEWAY<span class="token operator">:</span>
+                <span class="token keyword">case</span> SERVICE_UNAVAILABLE<span class="token operator">:</span>
+                <span class="token keyword">default</span><span class="token operator">:</span>
+                    ex<span class="token punctuation">.</span><span class="token function">setDisplayMessage</span><span class="token punctuation">(</span><span class="token string">"网络错误"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//均视为网络错误</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> ex<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>e <span class="token keyword">instanceof</span> <span class="token class-name">ServerException</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token comment" spellcheck="true">//服务器返回的错误</span>
+            ServerException resultException <span class="token operator">=</span> <span class="token punctuation">(</span>ServerException<span class="token punctuation">)</span> e<span class="token punctuation">;</span>
+            ex <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ApiException</span><span class="token punctuation">(</span>resultException<span class="token punctuation">,</span> ERROR<span class="token punctuation">.</span>SERVER_ERROR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ex<span class="token punctuation">.</span><span class="token function">setDisplayMessage</span><span class="token punctuation">(</span>resultException<span class="token punctuation">.</span><span class="token function">getMsg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> ex<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>e <span class="token keyword">instanceof</span> <span class="token class-name">JsonParseException</span>
+                <span class="token operator">||</span> e <span class="token keyword">instanceof</span> <span class="token class-name">JSONException</span>
+                <span class="token operator">||</span> e <span class="token keyword">instanceof</span> <span class="token class-name">ParseException</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            ex <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ApiException</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> ERROR<span class="token punctuation">.</span>PARSE_ERROR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ex<span class="token punctuation">.</span><span class="token function">setDisplayMessage</span><span class="token punctuation">(</span><span class="token string">"解析错误"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token comment" spellcheck="true">//均视为解析错误</span>
+            <span class="token keyword">return</span> ex<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>e <span class="token keyword">instanceof</span> <span class="token class-name">ConnectException</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            ex <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ApiException</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> ERROR<span class="token punctuation">.</span>NETWORD_ERROR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ex<span class="token punctuation">.</span><span class="token function">setDisplayMessage</span><span class="token punctuation">(</span><span class="token string">"连接失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//均视为网络错误</span>
+            <span class="token keyword">return</span> ex<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token punctuation">{</span>
+            ex <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ApiException</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> ERROR<span class="token punctuation">.</span>UNKNOWN<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ex<span class="token punctuation">.</span><span class="token function">setDisplayMessage</span><span class="token punctuation">(</span><span class="token string">"未知错误"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment" spellcheck="true">//未知错误</span>
+            <span class="token keyword">return</span> ex<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="约定的错误码"><a href="#约定的错误码" class="headerlink" title="约定的错误码"></a>约定的错误码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Error</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/**
+     * 未知错误
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> UNKNOWN <span class="token operator">=</span> <span class="token number">1000</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
+     * 解析错误
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> PARSE_ERROR <span class="token operator">=</span> <span class="token number">1001</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
+     * 网络错误
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> NETWORD_ERROR <span class="token operator">=</span> <span class="token number">1002</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
+     * 协议出错
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> HTTP_ERROR <span class="token operator">=</span> <span class="token number">1003</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
+     * 服务器出错
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> SERVER_ERROR <span class="token operator">=</span> <span class="token number">1004</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="用于ExceptionHandler的服务器异常"><a href="#用于ExceptionHandler的服务器异常" class="headerlink" title="用于ExceptionHandler的服务器异常"></a>用于ExceptionHandler的服务器异常</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ServerException</span> <span class="token keyword">extends</span> <span class="token class-name">RuntimeException</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> code<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> String message<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>这样，我们就实现了我们的目标，通过拦截器的方式截取网络请求的错误和异常并做统一的分发与处理。</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/05/28/hello-world/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Akari's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        dr.cirno@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">2</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Android/">Android<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hello/">Hello<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">loyalty</i>
+                
+                标签
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Akari's Blog
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+
+    <script src="/js/lazyload.min.js"></script>
+    <script src="/js/js.min.js"></script>
+
+
+
+    <script src="/js/nprogress.js"></script>
+
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+<script>
+    <!-- Offer LazyLoad -->
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    <!-- Start Queue -->
+    $(document).ready(function(){
+        setTimeout(function(){
+            setInterval(function(){
+                queue.execNext();
+            },200);
+        },3000);
+    });
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
