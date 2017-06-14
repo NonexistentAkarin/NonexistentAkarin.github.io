@@ -10,7 +10,7 @@
     
     <title>
         
-            Hello World | 
+            探索ConstraintLayout的使用 | 
         
         Akari&#39;s Blog
     </title>
@@ -32,7 +32,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Akari">
     <meta name="description" content="null">
-    <meta name="keywords" content="null,Hello">
+    <meta name="keywords" content="null,Android,ConstraintLayout">
 
     <!-- Favicons -->
     <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
@@ -58,9 +58,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://nonexistentakarin.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Hello World | Akari&#39;s Blog">
+    <meta property="og:title" content="探索ConstraintLayout的使用 | Akari&#39;s Blog">
     <meta property="og:description" content="null">
-    <meta property="og:article:tag" content="Hello"> 
+    <meta property="og:article:tag" content="Android"> <meta property="og:article:tag" content="ConstraintLayout"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -247,7 +247,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Quick-Start"><span class="post-toc-number">1.</span> <span class="post-toc-text">Quick Start</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Create-a-new-post"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Create a new post</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Run-server"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Run server</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Generate-static-files"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Generate static files</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Deploy-to-remote-sites"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#约束布局的依赖"><span class="post-toc-number">1.</span> <span class="post-toc-text">约束布局的依赖</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#约束布局的添加"><span class="post-toc-number">2.</span> <span class="post-toc-text">约束布局的添加</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#将已存在的布局转换为约束布局"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">将已存在的布局转换为约束布局</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建新的约束布局"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">创建新的约束布局</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#添加约束"><span class="post-toc-number">3.</span> <span class="post-toc-text">添加约束</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相对父控件位置"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">相对父控件位置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#按照顺序"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">按照顺序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对齐"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">对齐</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基准线对齐"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">基准线对齐</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GuideLine-指引线-约束"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">GuideLine (指引线) 约束</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#调整约束倾向"><span class="post-toc-number">4.</span> <span class="post-toc-text">调整约束倾向</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#调整视图大小"><span class="post-toc-number">5.</span> <span class="post-toc-text">调整视图大小</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设置宽高比"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">设置宽高比</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#与-GONE-控件连接的外边距"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">与 GONE 控件连接的外边距</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -284,7 +284,7 @@
         
     
             <p class="article-headline-p">
-                Hello World
+                探索ConstraintLayout的使用
             </p>
         </div>
 
@@ -303,7 +303,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Akari</strong>
-        <span>5月 28, 2017</span>
+        <span>6月 13, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -324,7 +324,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC3ElEQVR42u3aQW7DMAwEwPz/0+21QFB7SaqFI41PQerYGvWwIKnX15HXCxsbGxsbGxsbG/uR7Fd83Tz07Z6f37w/5/r+5F3VNWNjY2Pvza6Skr/+Rk02KL+/8G/AxsbGPoD9WwBc35OE03X85HHVWzM2NjY2dn5P/oRemYGNjY2NvZZ9HTPV6MpbTtjY2NjYkwZNPgbIRwLX31dLHWxsbOwz2fnQ9Dmf/3W+jY2Njf1gdvW6HutODtxU20/llWNjY2Nvyq4OcedbkxzlSdpP1XViY2Nj781OYmkyoO21gW6aRMXYw8bGxt6b3XvBNX6+6Hww0OylYWNjY2/Ezo/RVIuTeSzlBclo0IuNjY29BbvXuEna/UnB03tOYZuwsbGxN2VXx7d51OVhkz9hMnLGxsbG3pW9bIzaGg8kbaNeNDZ7adjY2NjbsZOYmRcq11uQ378swLCxsbE/it0bElQbPdXxQK9oufkVNjY29tbsaqM/D5j5b+cjYWxsbOwT2GupeflRLW+qBRI2Njb2aezqGPXvDugkpctoPICNjY29Ebs66F0VS8m4txqoNw0sbGxs7K3Z+aGcHJm0rqrRmI8ZsLGxsU9jj9rurZZQsonVBtaCUgQbGxv7A9l5AFQjbdX3+bYuGA9gY2NjfyC7N0ZtRkixbdQ76ImNjY2NnQxoq+VEHoe9t0eNJ2xsbOzD2NUjNdWRQHVIkLNHAYaNjY29Eft66ZOWUDWWqnGFjY2NjT0pJ/LNyoMzD9dlvTRsbGzsj2LPGb2Dm6tKnUIEYmNjY2/KboZBK1p6raj5Z2xsbOwT2Elo5cVJdRgw2aDCgSFsbGzsA9h5A2jSkMqfVo3GZoBhY2NjH8zOi4fqcZxeNGJjY2NjT4ay+XC3WtjkQ4vRkR1sbGzsLdiTIWtvO/LmVB5Uf9JLw8bGxn48u9q46YVcb2x8g8nfgo2Njb0p+5wLGxsbGxsbGxsb+zHXN/eVUyWtcuuwAAAAAElFTkSuQmCC">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADkUlEQVR42u3aS24jMQwFwNz/0jPbAIGd90jJcWaqV4bTrZbKC4afjz+uT9cHAhw4cODAgQMHDhw43pjjI74+3//1c77mw219+etsP/lZcODAgQPHPY5vQlFw7Ef3PzrA8zWTdz1/b4GOAwcOHDiucSTBLD/2jDIJus/30J4FBw4cOHD8LEeSUG2+v/Hz4MCBAweOf4kjKQ4mqyWJHA4cOHDgeDeOpKDWlvmGWywhfqxWigMHDhw4rg00vM/nt5jvwIEDB47/mKO9ZkzPm0Z5yyoP88WJcODAgQPHUY5ZCydPumarFQlYG1ZnGS0OHDhw4Ig52gPnYTgJpe1QXVKOzMuLOHDgwIHjBscmccrbUfsGVRLCh6EaBw4cOHBc45gF1+TO/DCzNlISenHgwIEDx2s4Zk2jZHBtUzTcfFOniDhw4MCB4xrHatGgpDhrNW3SywNtJxw4cODAMUrh8mJfEnqjZk85QteOUySBHAcOHDhw3OCYhbEN5ak37gMzDhw4cOC4wdEOEyThcLZ+PgDXHrgoDuLAgQMHjkMcs3LhrJi4b0HlKV+0Hxw4cODAcZTj+abbcHuvoTXb54FRORw4cODAcXmgITlSO1q3eSr//HDPOHDgwIHjGsdso2fHDmYjFLMWFA4cOHDgeA1HG0pnowxtkE72OVsBBw4cOHCc5dg3e5Jn9wE1LxfWbTAcOHDgwHGUI3+4TZ+G4wXroboDAw04cODAgePCqFx+T5uenR2baAe4ceDAgQPH6zlmS28O0wb1Nhh/k4jiwIEDB44LHG3ZbjZUlxcKZ2E+Tyxx4MCBA8c9jjahKgYFRqu1b9z/bDhw4MCB4yzHLAXaJE5tQXCTCkbP4sCBAweOaxyzDeVJYB6e2zGF1Rtx4MCBA8dRjrbhVBTdypZSnoblTakDxUEcOHDgwLHgmDWHZiEwP0Y7SFGvjwMHDhw4jnK0G50V+9qC3S9oO+HAgQMHjjjQJmH41LDCLIGchedhCocDBw4cOBZtp1mi1YbV2dtn/xDUxUEcOHDgwHGIo20p5QMHswGFWaEwKWJGGS0OHDhw4DjEcTaA5dxJuTAvSj4/RRFoceDAgQPHSzjy0Hs2hcvDZ/2D4cCBAweON+A4u7kkuLYoxQ5x4MCBA8c1jjxwzg6ZE+yLj8UbceDAgQPHBY7NQEMe6jbr54evd44DBw4cOI5yuHDgwIEDBw4cOHDgwPFm119hDHyFY7wX0gAAAABJRU5ErkJggg==">
         </ul>
     
 
@@ -336,7 +336,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/Hello/">Hello</a>
+        <a class="post_tag-link" href="/tags/Android/">Android</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/ConstraintLayout/">ConstraintLayout</a>
     </ul>
     
 
@@ -352,7 +352,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Hello World&url=https://nonexistentakarin.github.io//2017/05/28/hello-world/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=探索ConstraintLayout的使用&url=https://nonexistentakarin.github.io//2017/06/13/explore-the-use-of-ConstraintLayout/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -361,7 +361,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Hello World&url=https://nonexistentakarin.github.io//2017/05/28/hello-world/index.html&via=Akari" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=探索ConstraintLayout的使用&url=https://nonexistentakarin.github.io//2017/06/13/explore-the-use-of-ConstraintLayout/index.html&via=Akari" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -370,7 +370,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://nonexistentakarin.github.io//2017/05/28/hello-world/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://nonexistentakarin.github.io//2017/06/13/explore-the-use-of-ConstraintLayout/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -379,7 +379,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://nonexistentakarin.github.io//2017/05/28/hello-world/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://nonexistentakarin.github.io//2017/06/13/explore-the-use-of-ConstraintLayout/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -403,19 +403,86 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span>
+        <p>ConstraintLayout（约束布局）在不嵌套布局的情况下，创建比较复杂的布局。它和 RelativeLayout 很相似，控件的位置都是跟兄弟控件和父控件相关联的，但它比 RelativeLayout 更加灵活，在 Android Studio 布局编辑中更容易使用。</p>
+<p>在 Android Studio 布局编辑器的可视化工具下，ConstraintLayout 所有功能都可以使用。可以通过拖拽的方式来创建 ConstraintLayout 布局。</p>
+<h1 id="约束布局的依赖"><a href="#约束布局的依赖" class="headerlink" title="约束布局的依赖"></a>约束布局的依赖</h1><p>按照如下步骤添加依赖：</p>
+<p>1.点击 <strong>Tools &gt; Android &gt; SDK Manager</strong><br>2.点击 <strong>SDK Tools</strong> 标签<br>3.展开 <strong>Support Repository</strong> 项，然后选中 <strong>ConstraintLayout for Android</strong> 和 <strong>Solver for ConstraintLayout</strong>。选中 <strong>Show Package Details</strong> 记住版本，接下来要用到<br>4.点击 <strong>OK</strong><br>5.然后在应用的 <em>build.gradle</em> 下添加依赖，其中版本号为步骤3中记录下来的</p>
+<pre class=" language-gradle"><code class="language-gradle">dependencies {
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+}
 </code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server
+<p>6.最后点击 Sync Project with Gradle Files</p>
+<h1 id="约束布局的添加"><a href="#约束布局的添加" class="headerlink" title="约束布局的添加"></a>约束布局的添加</h1><h2 id="将已存在的布局转换为约束布局"><a href="#将已存在的布局转换为约束布局" class="headerlink" title="将已存在的布局转换为约束布局"></a>将已存在的布局转换为约束布局</h2><p>通过以下方式，可以将一个已经存在的布局转换为约束布局：</p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/constraintlayout01.png" alt="constraintlayout01"></p>
+<ol>
+<li>选择 <strong>Design</strong> 视图</li>
+<li>在 <strong>Component Tree</strong> 窗口下，右击布局，点击<strong>Convert layout to ConstraintLayout</strong></li>
+</ol>
+<h2 id="创建新的约束布局"><a href="#创建新的约束布局" class="headerlink" title="创建新的约束布局"></a>创建新的约束布局</h2><p>通过以下方式，创建约束布局文件：</p>
+<ol>
+<li>在 <strong>Project</strong> 窗口下，点击模块文件夹，然后选择 <strong>File &gt; New &gt; XML &gt; Layout XML</strong></li>
+<li>输入文件名，以<strong>android.support.constraint.ConstraintLayout</strong>作为根标签</li>
+</ol>
+<h1 id="添加约束"><a href="#添加约束" class="headerlink" title="添加约束"></a>添加约束</h1><p>添加约束有如下规则：</p>
+<ul>
+<li>每个控制至少有两个约束：一个横向的一个纵向的</li>
+<li>约束手柄只能与对应方向上的锚点链接，即横向的手柄跟横向的锚点链接，纵向的手柄跟纵向的锚点链接</li>
+<li>每个约束手柄只能创建一个约束，但相同的锚点上可以被多个约束链接</li>
+</ul>
+<p>向布局中添加控件很简单，只要通过拖拽就可以了。拖拽到布局中后，我们点击视图，会看到如下内容：</p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/constraint02.png" alt="constraint02"></p>
+<p>图中各部分分别是：</p>
+<p>1 - 调整手柄：拖动手柄可调整视图大小<br>2 - 约束手柄：拖动可添加约束（鼠标放在圆圈上，如果未添加约束，圆圈会变为绿色，鼠标按住可进行拖拽，为此方向上添加约束；如果已添加约束，圆圈是红色的，点击可删除此方向上的约束）<br>3 - 清除按钮：点击可清除控件的所有约束<br>4 - 基线按钮（只有文字控件才有）：点击会在文字下方出现一个基线手柄，如下图：</p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/constraint03.png" alt="constraint03"></p>
+<p>基线只能与其他基线进行链接，实现与其他文字基线对齐的效果。</p>
+<p>我们可以使用约束达到以下布局效果：</p>
+<h2 id="相对父控件位置"><a href="#相对父控件位置" class="headerlink" title="相对父控件位置"></a>相对父控件位置</h2><p>控制视图与父控件四周的位置关系</p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/parent-constraint_2x.png" alt="parent-constraint_2x"></p>
+<h2 id="按照顺序"><a href="#按照顺序" class="headerlink" title="按照顺序"></a>按照顺序</h2><p>使视图按照一定顺序摆放</p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/position-constraint_2x.png" alt="position-constraint_2x"></p>
+<h2 id="对齐"><a href="#对齐" class="headerlink" title="对齐"></a>对齐</h2><p>使一个视图的边缘与另一个视图的边缘对齐</p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/alignment-constraint-offset_2x.png" alt="alignment-constraint-offset_2x"></p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/alignment-constraint-offset_2x.png" alt="alignment-constraint-offset_2x"></p>
+<h2 id="基准线对齐"><a href="#基准线对齐" class="headerlink" title="基准线对齐"></a>基准线对齐</h2><p>使视图的文字基准线与另一个视图的文字基准线对齐</p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/baseline-constraint_2x.png" alt="baseline-constraint_2x"></p>
+<h2 id="GuideLine-指引线-约束"><a href="#GuideLine-指引线-约束" class="headerlink" title="GuideLine (指引线) 约束"></a>GuideLine (指引线) 约束</h2><p>GuideLine 对用户来说是不可见的，有水平和竖直两种。我们可以按照距离布局边缘的百分比或实际距离来放置 GuideLine。</p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/guideline-constraint_2x.png" alt="guideline-constraint_2x"></p>
+<p>点击如下按钮添加 Guideline。</p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/guideline.png" alt="guideline"></p>
+<p>已添加垂直方向 Guideline 为例，如下图，会出现一条垂直方向的虚线，虚线顶端有个圆圈，点击圆圈可以切换不同的模式：左边距、右边距、百分比，圆圈内图案会跟随发生变化，分别为向左箭头、向右箭头、百分号。</p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/guidline_vertical.png" alt="guidline_vertical"></p>
+<h1 id="调整约束倾向"><a href="#调整约束倾向" class="headerlink" title="调整约束倾向"></a>调整约束倾向</h1><p>当我们为视图两边（左右两边或上下两边）都添加约束时，视图会居中，默认为50%的倾向。</p>
+<p>我们可以在编辑区域拖拽视图进行调整，或者在 <em>Properties</em> 窗口进行调整。</p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/bias.gif" alt="bias"></p>
+<h1 id="调整视图大小"><a href="#调整视图大小" class="headerlink" title="调整视图大小"></a>调整视图大小</h1><p>我们可以通过编辑区域视图四个角上的把手来调整视图大小，但这属于硬编码，尺寸很难适应不同的内容和屏幕尺寸。</p>
+<p>我们可以通过 Properties 窗口来调整视图尺寸，点击视图，它将会出现在编辑区域的右边，如下图所示：</p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/layout-editor-properties-callouts_2-3_2x.png" alt="layout-editor-properties-callouts_2-3_2x"></p>
+<p>各部分分别表示：</p>
+<p>1 - 宽高比<br>2 - 删除约束<br>3 - 宽 / 高模式</p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/layout-width-wrap.png" alt="layout-width-wrap"> 代表Wrap Content</p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/layout-width-match.png" alt="layout-width-match"> 代表充满约束</p>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/layout-width-fixed.png" alt="layout-width-fixed"> 代表固定尺寸</p>
+<p>点击可在三个模式间切换<br>4 - 外边距<br>5 - 约束倾向</p>
+<h2 id="设置宽高比"><a href="#设置宽高比" class="headerlink" title="设置宽高比"></a>设置宽高比</h2><p>为了设置宽高比，我们至少要将一个约束的尺寸设置为0dp，然后为 layout_constraintDimentionRatio 属性设置一个比例值，例如</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Button</span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0dp<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintDimensionRatio</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>1:1<span class="token punctuation">"</span></span>
+    <span class="token punctuation">/></span></span>
 </code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<p>将使按钮的高度和宽度保持一致。</p>
+<p>如果宽高都设置了0dp约束，那么需要在比例前添加W,或H,以确定受约束的是高还是宽，然后受约束的一方根据不受约束的一方，按照比例计算自己的尺寸。</p>
+<h2 id="与-GONE-控件连接的外边距"><a href="#与-GONE-控件连接的外边距" class="headerlink" title="与 GONE 控件连接的外边距"></a>与 GONE 控件连接的外边距</h2><p>两个控件 A 和 B，B 向 A 添加约束后，如果 A 的可见性变为 GONE，我可以通过设置相关属性，设置在 A 不可见时 B 的外边距，这些属性包括：</p>
+<ul>
+<li>layout_goneMarginStart</li>
+<li>layout_goneMarginEnd</li>
+<li>layout_goneMarginLeft</li>
+<li>layout_goneMarginTop</li>
+<li>layout_goneMarginRight</li>
+<li>layout_goneMarginBottom</li>
+</ul>
+<p><img src="http://7o4zgd.com1.z0.glb.clouddn.com/relative-positioning-margin.png" alt="relative-positioning-margin"></p>
+<p>如图，B 向 A 添加约束后，如果 A 的可见性变为 GONE，B 的外边距就会变为 layout_goneMarginLeft 所指定的值。</p>
 
     
 
@@ -442,19 +509,19 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/05/28/handle-error-and-exception-with-Retrofit-and-RxJava/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
+    
+        <a href="/2017/05/28/handle-error-and-exception-with-Retrofit-and-RxJava/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
     
 </nav>
 
