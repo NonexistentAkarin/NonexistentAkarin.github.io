@@ -10,7 +10,7 @@
     
     <title>
         
-            Hello World | 
+            从现在开始使用 Firebase Cloud Messaging (FCM) 推送通知 | 
         
         Akari&#39;s Blog
     </title>
@@ -32,7 +32,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Akari">
     <meta name="description" content="null">
-    <meta name="keywords" content="null,Hello">
+    <meta name="keywords" content="null,Android,FCM">
 
     <!-- Favicons -->
     <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
@@ -58,9 +58,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://nonexistentakarin.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Hello World | Akari&#39;s Blog">
+    <meta property="og:title" content="从现在开始使用 Firebase Cloud Messaging (FCM) 推送通知 | Akari&#39;s Blog">
     <meta property="og:description" content="null">
-    <meta property="og:article:tag" content="Hello"> 
+    <meta property="og:article:tag" content="Android"> <meta property="og:article:tag" content="FCM"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -247,7 +247,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Quick-Start"><span class="post-toc-number">1.</span> <span class="post-toc-text">Quick Start</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Create-a-new-post"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Create a new post</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Run-server"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Run server</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Generate-static-files"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Generate static files</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Deploy-to-remote-sites"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#在网页端申请并配置使用Firebase"><span class="post-toc-number">1.</span> <span class="post-toc-text">在网页端申请并配置使用Firebase</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#在Android项目中配置使用Firebase"><span class="post-toc-number">2.</span> <span class="post-toc-text">在Android项目中配置使用Firebase</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用Firebase推送通知"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用Firebase推送通知</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -284,7 +284,7 @@
         
     
             <p class="article-headline-p">
-                Hello World
+                从现在开始使用 Firebase Cloud Messaging (FCM) 推送通知
             </p>
         </div>
 
@@ -303,7 +303,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Akari</strong>
-        <span>5月 28, 2017</span>
+        <span>6月 26, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -324,7 +324,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC3ElEQVR42u3aQW7DMAwEwPz/0+21QFB7SaqFI41PQerYGvWwIKnX15HXCxsbGxsbGxsbG/uR7Fd83Tz07Z6f37w/5/r+5F3VNWNjY2Pvza6Skr/+Rk02KL+/8G/AxsbGPoD9WwBc35OE03X85HHVWzM2NjY2dn5P/oRemYGNjY2NvZZ9HTPV6MpbTtjY2NjYkwZNPgbIRwLX31dLHWxsbOwz2fnQ9Dmf/3W+jY2Njf1gdvW6HutODtxU20/llWNjY2Nvyq4OcedbkxzlSdpP1XViY2Nj781OYmkyoO21gW6aRMXYw8bGxt6b3XvBNX6+6Hww0OylYWNjY2/Ezo/RVIuTeSzlBclo0IuNjY29BbvXuEna/UnB03tOYZuwsbGxN2VXx7d51OVhkz9hMnLGxsbG3pW9bIzaGg8kbaNeNDZ7adjY2NjbsZOYmRcq11uQ378swLCxsbE/it0bElQbPdXxQK9oufkVNjY29tbsaqM/D5j5b+cjYWxsbOwT2GupeflRLW+qBRI2Njb2aezqGPXvDugkpctoPICNjY29Ebs66F0VS8m4txqoNw0sbGxs7K3Z+aGcHJm0rqrRmI8ZsLGxsU9jj9rurZZQsonVBtaCUgQbGxv7A9l5AFQjbdX3+bYuGA9gY2NjfyC7N0ZtRkixbdQ76ImNjY2NnQxoq+VEHoe9t0eNJ2xsbOzD2NUjNdWRQHVIkLNHAYaNjY29Eft66ZOWUDWWqnGFjY2NjT0pJ/LNyoMzD9dlvTRsbGzsj2LPGb2Dm6tKnUIEYmNjY2/KboZBK1p6raj5Z2xsbOwT2Elo5cVJdRgw2aDCgSFsbGzsA9h5A2jSkMqfVo3GZoBhY2NjH8zOi4fqcZxeNGJjY2NjT4ay+XC3WtjkQ4vRkR1sbGzsLdiTIWtvO/LmVB5Uf9JLw8bGxn48u9q46YVcb2x8g8nfgo2Njb0p+5wLGxsbGxsbGxsb+zHXN/eVUyWtcuuwAAAAAElFTkSuQmCC">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADiUlEQVR42u3aQXLbMBAEQP3/08nVVUrsmV2A1qFxclkiCTQPowX29cf4Ml4IcODAgQMHDhw4cOD4YI5XPP5xoy//f//O+6ff3/n7u/1vzvu14MCBAweOGxw/RNHoOy1osrDv4YbzxIEDBw4c1zjyxydLbSMwmVUe9slacODAgQPH53Pk4RpNNLjDZi04cODAgeNzODaF3G9tR+LAgQMHjuc5kkXui7FZ3Lb3f2ivFAcOHDhwrBsaPv/vR/s7cODAgQPHG0c7TrW7JcdLbUgPV4QDBw4cOI5y5EHVFmZ5oZiXbW2xl5DhwIEDB46zHHnsbbYOZyG9Kc/yYMaBAwcOHGc59sc5399h1qbQHkq1rxAHDhw4cDzDMSMoiqVFSZbMIf8/Dhw4cOC4xzGLzPboKNkuTJ7SvrwoqnHgwIEDxwWOZBmvcuRtDW2IzmaOAwcOHDie55i1F+Qbf/mG4Czg81nhwIEDB457HElxlX8/PyJqy7b2xwEOHDhw4PhdjjZoNxuI7SFWwp233OHAgQMHjtscmwXXkXYoVmfFW9HQgAMHDhw4FhybdoTNRmF+NDVcZPyqcODAgQPHDY7ossutDHkTXtt+8cNTcODAgQPHBY48RGeI7aTzxogDn+LAgQMHjqMcbaG1D7z22lnYF5uGOHDgwIHjGkd7FNRu0uUR2B4mtfGPAwcOHDjucbSberNGunazr30ZyQ8FHDhw4MDxPEcbZvvSbl+YzeIfBw4cOHD8FkfbNrcpsZJrZ7g/zB8HDhw4cBzlaFsQkjCblXPJ/ROItq0BBw4cOHDc4Mhjr2042B9rtUVji4UDBw4cOM5yRBeUm3Sb0M2Lt1lbXlTR4sCBAweOQxyzMSvVZkdQbdkZhT0OHDhw4LjMMWtHaEuyWWmXF435a8aBAwcOHLc58q3ANlBnQdjes/0ZgQMHDhw47nG0zXCnFpOXhcnc2sMnHDhw4MBxlmOzFThr3R5OOj6yqrcLceDAgQPHUY5XPNp4zsM7QZ8dZQ1LOBw4cODAseZIwrUN2tnYl3n54RkOHDhw4LjNsSmu2pDO2ybyEvHiXikOHDhw4HiQI4+3PJiTyE8aL441NODAgQMHjssc7QI2rQ/tVmC+LYgDBw4cOG5z5PGWL3VWpCXhOnsWDhw4cOB4hmN2IJRHXb7ge0+/0t+BAwcOHDjeOAwcOHDgwIEDBw4cOHB82PgLvGaQOXI6NCgAAAAASUVORK5CYII=">
         </ul>
     
 
@@ -336,7 +336,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/Hello/">Hello</a>
+        <a class="post_tag-link" href="/tags/Android/">Android</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/FCM/">FCM</a>
     </ul>
     
 
@@ -352,7 +352,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Hello World&url=https://nonexistentakarin.github.io//2017/05/28/hello-world/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=从现在开始使用 Firebase Cloud Messaging (FCM) 推送通知&url=https://nonexistentakarin.github.io//2017/06/26/start-using-FCM-from-now-on/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -361,7 +361,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Hello World&url=https://nonexistentakarin.github.io//2017/05/28/hello-world/index.html&via=Akari" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=从现在开始使用 Firebase Cloud Messaging (FCM) 推送通知&url=https://nonexistentakarin.github.io//2017/06/26/start-using-FCM-from-now-on/index.html&via=Akari" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -370,7 +370,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://nonexistentakarin.github.io//2017/05/28/hello-world/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://nonexistentakarin.github.io//2017/06/26/start-using-FCM-from-now-on/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -379,7 +379,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://nonexistentakarin.github.io//2017/05/28/hello-world/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://nonexistentakarin.github.io//2017/06/26/start-using-FCM-from-now-on/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -403,19 +403,71 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span>
+        <p>Firebase Cloud Messaging (FCM) 是一种跨平台消息传递解决方案，我们可以使用它在Android系统上推送消息和通知。</p>
+<p>相比国内各种各样的第三方推送服务，如小米推送、腾讯信鸽推送、极光推送等，FCM的最大优势是他是系统级别的推送服务，可以获得像iOS那样任何时候都可以推送给用户的效果，而不必担心推送的后台服务被杀的情况。因为是Android系统级别的服务，FCM不需要像其他第三方推送服务那样，在后台维护一个Service，维持应用与服务端之间的TCP长连接。</p>
+<p>这里简单讲述如何把FCM集成到我们的应用中。</p>
+<h1 id="在网页端申请并配置使用Firebase"><a href="#在网页端申请并配置使用Firebase" class="headerlink" title="在网页端申请并配置使用Firebase"></a>在网页端申请并配置使用Firebase</h1><p>1.首先来到Firebase网站：<a href="https://firebase.google.com" target="_blank" rel="external">https://firebase.google.com</a></p>
+<p>登陆我们自己的Google账户，点击右上角的”转到控制台”。</p>
+<p>  <img src="https://ooo.0o0.ooo/2017/06/29/59542149ea772.png" alt="Firebase01"></p>
+<p>2.进入到Firebase的控制台界面。</p>
+<p>  <img src="https://ooo.0o0.ooo/2017/06/29/5954222493d63.png" alt="Firebase02"></p>
+<p>3.点击 “添加项目”。</p>
+<p>  <img src="https://ooo.0o0.ooo/2017/06/29/595422ba4f725.png" alt="Firebase03"></p>
+<p>4.创建完项目后会显示”欢迎使用Firebase”的界面。</p>
+<p>  <img src="https://ooo.0o0.ooo/2017/06/29/5954236fa4b35.png" alt="Firebase04"></p>
+<p>这里我们选择”将Firebase添加到您的Android应用”。</p>
+<p>5.输入”Android软件包名称”和”应用别名”，点击”注册应用”。</p>
+<p>  <img src="https://ooo.0o0.ooo/2017/06/29/5954249b9af04.png" alt="Firebase05"></p>
+<p>6.点击”下载google-services.json”，并把下载的google-services.json放入我们应用项目的app文件夹中。</p>
+<p>  <img src="https://ooo.0o0.ooo/2017/06/29/5954256f098a2.png" alt="Firebase06"></p>
+<p>7.在build.gradle中添加Firebase SDK依赖。</p>
+<ul>
+<li>在项目级 build.gradle（<project>/build.gradle）的     dependencies{} 中添加：<pre class=" language-gradle"><code class="language-gradle">classpath 'com.google.gms:google-services:3.1.0'
 </code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server
+</project></li>
+<li>在应用级 build.gradle（<project>/<app-module>/build.gradle）的最下面添加：<pre class=" language-gradle"><code class="language-gradle">apply plugin: 'com.google.gms.google-services'
 </code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate
+</app-module></project></li>
+<li>最后点击 IDE 中显示的栏中的”立即同步”。</li>
+</ul>
+<p>点击”完成”。</p>
+<p>8.然后就可以在概览中看到刚刚创建的项目。</p>
+<p>  <img src="https://ooo.0o0.ooo/2017/06/29/5954297b7497f.png" alt="Firebase07"></p>
+<p>9.点击左侧的”Notifications”，进入通知界面，再点击”查看文档”，可以查看实现FCM推送的实现路径。</p>
+<p>  <img src="https://ooo.0o0.ooo/2017/06/29/59542a7cd56fc.png" alt="Firebase08"></p>
+<p>  在网页下方有Google提供的Demo地址：<a href="https://github.com/firebase/quickstart-android/tree/master/messaging" target="_blank" rel="external">https://github.com/firebase/quickstart-android/tree/master/messaging</a></p>
+<h1 id="在Android项目中配置使用Firebase"><a href="#在Android项目中配置使用Firebase" class="headerlink" title="在Android项目中配置使用Firebase"></a>在Android项目中配置使用Firebase</h1><p>1.在应用级 build.gradle（<project>/<app-module>/build.gradle）里面添加相关依赖。</app-module></project></p>
+<pre class=" language-gradle"><code class="language-gradle">compile 'com.google.firebase:firebase-core:11.0.1'
+compile 'com.google.firebase:firebase-messaging:11.0.1'
+compile 'com.firebase:firebase-jobdispatcher:0.6.0'
 </code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy
+<p>2.添加相关代码。</p>
+<ul>
+<li>添加三个Service文件到项目中（Google的Demo中有提供）<ul>
+<li>MyFirebaseInstanceIDService</li>
+<li>MyFirebaseMessagingService</li>
+<li>MyJobService</li>
+</ul>
+</li>
+<li>修改AndroidManifest<ul>
+<li>添加联网权限<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>android.permission.INTERNET<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
 </code></pre>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+</li>
+<li>注册这三个Service<br><img src="https://ooo.0o0.ooo/2017/06/29/59542f76ab6c9.png" alt="Firebase09"></li>
+</ul>
+</li>
+</ul>
+<h1 id="使用Firebase推送通知"><a href="#使用Firebase推送通知" class="headerlink" title="使用Firebase推送通知"></a>使用Firebase推送通知</h1><p>1.在Firebase网页端通知界面，点击发送您的第一条消息，”目标”选择”单个设备”，提示需要FCM注册令牌。</p>
+<p>  <img src="https://ooo.0o0.ooo/2017/06/29/595430c0d4a9d.png" alt="Firebase10"></p>
+<p>2.在Android项目的MyFirebaseInstanceIDService中，可以通过Log的形式，将FCM注册令牌打印到日志。</p>
+<p>  <img src="https://ooo.0o0.ooo/2017/06/29/595431a5de1b3.png" alt="Firebase11"></p>
+<p>3.将日志中打印出的token作为FCM注册令牌填入，点击”发送消息”。</p>
+<p>  <img src="https://ooo.0o0.ooo/2017/06/29/595434da6b37c.png" alt="Firebase12"></p>
+<p>  跳转到推送”已完成”的页面。</p>
+<p>  <img src="https://ooo.0o0.ooo/2017/06/29/595436126cad4.png" alt="Firebase13"></p>
+<p>4.于是我们在手机端也已经收到了通知。</p>
+<p>  <img src="https://ooo.0o0.ooo/2017/06/29/5954367fcfea5.png" alt="Firebase14"></p>
+<p>  这说明我们已经使用FCM推送成功。</p>
 
     
 
@@ -442,19 +494,19 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/05/28/handle-error-and-exception-with-Retrofit-and-RxJava/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
+    
+        <a href="/2017/06/13/explore-the-use-of-ConstraintLayout/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
     
 </nav>
 
